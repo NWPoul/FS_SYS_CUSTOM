@@ -12803,7 +12803,8 @@ var QueryObserver = class extends Subscribable {
       isRefetchError: isError && hasData,
       isStale: isStale(query, options),
       refetch: this.refetch,
-      promise: this.#currentThenable
+      promise: this.#currentThenable,
+      isEnabled: resolveEnabled(options.enabled, query) !== false
     };
     const nextResult = result;
     if (this.options.experimental_prefetchInRender) {
@@ -14348,7 +14349,7 @@ var devtoolsImpl = (fn, devtoolsOptions = {}) => (set, get, api) => {
   const { enabled, anonymousActionType, store, ...options } = devtoolsOptions;
   let extensionConnector;
   try {
-    extensionConnector = (enabled != null ? enabled : { APP_VERSION: "11.07.2025, 07:27 UTC" }.MODE !== "production") && window.__REDUX_DEVTOOLS_EXTENSION__;
+    extensionConnector = (enabled != null ? enabled : { APP_VERSION: "12.07.2025, 23:51 UTC" }.MODE !== "production") && window.__REDUX_DEVTOOLS_EXTENSION__;
   } catch (e2) {}
   if (!extensionConnector) {
     return fn(set, get, api);
@@ -14403,7 +14404,7 @@ var devtoolsImpl = (fn, devtoolsOptions = {}) => (set, get, api) => {
     let didWarnAboutReservedActionType = false;
     const originalDispatch = api.dispatch;
     api.dispatch = (...args) => {
-      if ({ APP_VERSION: "11.07.2025, 07:27 UTC" }.MODE !== "production" && args[0].type === "__setState" && !didWarnAboutReservedActionType) {
+      if ({ APP_VERSION: "12.07.2025, 23:51 UTC" }.MODE !== "production" && args[0].type === "__setState" && !didWarnAboutReservedActionType) {
         console.warn('[zustand devtools middleware] "__setState" action type is reserved to set state from the devtools. Avoid using it.');
         didWarnAboutReservedActionType = true;
       }
@@ -20549,7 +20550,7 @@ function App() {
 
 // src/index.tsx
 var jsx_runtime17 = __toESM(require_jsx_runtime(), 1);
-var APP_VERSION = { APP_VERSION: "11.07.2025, 07:27 UTC" }?.APP_VERSION;
+var APP_VERSION = { APP_VERSION: "12.07.2025, 23:51 UTC" }?.APP_VERSION;
 console.log("APP_VERSION", APP_VERSION, undefined);
 var queryClient = new QueryClient;
 var elem = document.getElementById("root");

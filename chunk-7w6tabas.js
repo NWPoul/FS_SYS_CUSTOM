@@ -22595,7 +22595,7 @@ var init_keys = __esm(() => {
 
 // src/entityCache/store.ts
 function getEntityBuster() {
-  return String({ APP_VERSION: "17.11.2026, 22:27 UTC", DEV: false }?.APP_VERSION ?? "0");
+  return String({ APP_VERSION: "17.11.2026, 22:31 UTC", DEV: false }?.APP_VERSION ?? "0");
 }
 function slimUsersById(usersById) {
   const out = {};
@@ -23839,7 +23839,7 @@ var devtoolsImpl = (fn, devtoolsOptions = {}) => (set, get, api) => {
   const { enabled, anonymousActionType, store, actionCreators, ...options } = devtoolsOptions;
   let extensionConnector;
   try {
-    extensionConnector = (enabled != null ? enabled : { APP_VERSION: "17.11.2026, 22:27 UTC", DEV: false }.MODE !== "production") && window.__REDUX_DEVTOOLS_EXTENSION__;
+    extensionConnector = (enabled != null ? enabled : { APP_VERSION: "17.11.2026, 22:31 UTC", DEV: false }.MODE !== "production") && window.__REDUX_DEVTOOLS_EXTENSION__;
   } catch (e) {}
   if (!extensionConnector) {
     return fn(set, get, api);
@@ -23907,7 +23907,7 @@ var devtoolsImpl = (fn, devtoolsOptions = {}) => (set, get, api) => {
     let didWarnAboutReservedActionType = false;
     const originalDispatch = api.dispatch;
     api.dispatch = (...args) => {
-      if ({ APP_VERSION: "17.11.2026, 22:27 UTC", DEV: false }.MODE !== "production" && args[0].type === "__setState" && !didWarnAboutReservedActionType) {
+      if ({ APP_VERSION: "17.11.2026, 22:31 UTC", DEV: false }.MODE !== "production" && args[0].type === "__setState" && !didWarnAboutReservedActionType) {
         console.warn('[zustand devtools middleware] "__setState" action type is reserved to set state from the devtools. Avoid using it.');
         didWarnAboutReservedActionType = true;
       }
@@ -31776,7 +31776,7 @@ function ProfileMenuCache() {
 
 // src/components/ProfileMenu/ProfileMenu.tsx
 var jsx_dev_runtime14 = __toESM(require_jsx_dev_runtime(), 1);
-var APP_VERSION = { APP_VERSION: "17.11.2026, 22:27 UTC", DEV: false }?.APP_VERSION;
+var APP_VERSION = { APP_VERSION: "17.11.2026, 22:31 UTC", DEV: false }?.APP_VERSION;
 function LogOutConfirmation({
   onConfirm,
   onCancel
@@ -32834,7 +32834,7 @@ function App() {
 // src/index.tsx
 init_queryClient2();
 var jsx_dev_runtime21 = __toESM(require_jsx_dev_runtime(), 1);
-var APP_VERSION2 = { APP_VERSION: "17.11.2026, 22:27 UTC", DEV: false }?.APP_VERSION;
+var APP_VERSION2 = { APP_VERSION: "17.11.2026, 22:31 UTC", DEV: false }?.APP_VERSION;
 console.log("APP_VERSION", APP_VERSION2, undefined);
 var ReactQueryDevtools = null;
 var elem = document.getElementById("root");
@@ -32854,6 +32854,6 @@ var app = /* @__PURE__ */ jsx_dev_runtime21.jsxDEV(import_react24.default.Strict
     ]
   }, undefined, true, undefined, this)
 }, undefined, false, undefined, this);
-var root = undefined.data.root ??= import_client.default.createRoot(elem);
+var root = import_client.default.createRoot(elem);
 root.render(app);
 if (undefined) {}

@@ -1,26 +1,38 @@
 /* FS SYS shell SW — generated; do not edit */
-const CACHE_NAME = "fs-sys-shell-18.11.2026, 09:42 UTC";
+const CACHE_NAME = "fs-sys-shell-18.11.2026, 18:05 UTC";
 const PRECACHE = [
   "/FS_SYS_CUSTOM/index.html",
   "/FS_SYS_CUSTOM/manifest.webmanifest",
   "/FS_SYS_CUSTOM/icons/icon-192.png",
   "/FS_SYS_CUSTOM/icons/icon-512.png",
-  "/FS_SYS_CUSTOM/chunk-2d1qfq9g.js",
-  "/FS_SYS_CUSTOM/chunk-jfby7p16.css"
+  "/FS_SYS_CUSTOM/chunk-n0hk8scr.js",
+  "/FS_SYS_CUSTOM/chunk-25ywvqq1.css"
 ];
 const STATIC_EXT = /\.(?:js|css|png|svg|webmanifest|ico|woff2?)$/i;
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(async (cache) => {
-      // Per-URL add so one bad asset does not abort the whole shell install.
+      // Per-URL add so one bad asset does not abort non-shell assets.
+      const failed = [];
       await Promise.all(
         PRECACHE.map((url) =>
           cache.add(url).catch((err) => {
+            failed.push(url);
             console.warn('SW precache skip', url, err);
           })
         )
       );
+      if (failed.length) {
+        console.error('SW precache incomplete', failed);
+      }
+      // Shell must be complete offline — abort if any html/js/css URL failed (icons soft-fail).
+      const criticalMissing = failed.some(
+        (url) => typeof url === 'string' && /\.(?:html|js|css)(?:\?|$)/i.test(url)
+      );
+      if (criticalMissing) {
+        throw new Error('SW precache missing critical asset');
+      }
       await self.skipWaiting();
     })
   );

@@ -1,13 +1,14 @@
 /* FS SYS shell SW — generated; do not edit */
-const CACHE_NAME = "fs-sys-shell-18.11.2026, 08:33 UTC";
+const CACHE_NAME = "fs-sys-shell-18.11.2026, 08:49 UTC";
 const PRECACHE = [
   "/FS_SYS_CUSTOM/index.html",
   "/FS_SYS_CUSTOM/manifest.webmanifest",
   "/FS_SYS_CUSTOM/icons/icon-192.png",
   "/FS_SYS_CUSTOM/icons/icon-512.png",
-  "/FS_SYS_CUSTOM/chunk-qwyqvff6.js",
+  "/FS_SYS_CUSTOM/chunk-pdm0ff58.js",
   "/FS_SYS_CUSTOM/chunk-zkrm65b6.css"
 ];
+const STATIC_EXT = /\.(?:js|css|png|svg|webmanifest|ico|woff2?)$/i;
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -40,13 +41,15 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
 
-  // Navigations: network-first, fall back to cached shell
+  // Navigations: network-first, fall back to cached shell (only cache OK responses).
   if (req.mode === 'navigate') {
     event.respondWith(
       fetch(req)
         .then((res) => {
-          const copy = res.clone();
-          void caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
+          if (res.ok) {
+            const copy = res.clone();
+            void caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
+          }
           return res;
         })
         .catch(async () => {
@@ -62,7 +65,9 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Same-origin static: cache-first
+  // Same-origin static assets only — leave other GETs to the network.
+  if (!STATIC_EXT.test(url.pathname)) return;
+
   event.respondWith(
     caches.open(CACHE_NAME).then(async (cache) => {
       const hit = await cache.match(req);

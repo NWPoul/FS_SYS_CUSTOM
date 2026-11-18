@@ -1,12 +1,12 @@
 /* FS SYS shell SW — generated; do not edit */
-const CACHE_NAME = "fs-sys-shell-18.11.2026, 18:05 UTC";
+const CACHE_NAME = "fs-sys-shell-18.11.2026, 19:09 UTC";
 const PRECACHE = [
   "/FS_SYS_CUSTOM/index.html",
   "/FS_SYS_CUSTOM/manifest.webmanifest",
   "/FS_SYS_CUSTOM/icons/icon-192.png",
   "/FS_SYS_CUSTOM/icons/icon-512.png",
-  "/FS_SYS_CUSTOM/chunk-n0hk8scr.js",
-  "/FS_SYS_CUSTOM/chunk-25ywvqq1.css"
+  "/FS_SYS_CUSTOM/chunk-ywkd2hsz.js",
+  "/FS_SYS_CUSTOM/chunk-d6nk10rz.css"
 ];
 const STATIC_EXT = /\.(?:js|css|png|svg|webmanifest|ico|woff2?)$/i;
 
@@ -39,10 +39,12 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
+  // Clean old caches only — do not claim clients (avoids taking over mid first-paint).
+  // Control starts on the next navigation (restart / reload after install).
   event.waitUntil(
     caches.keys().then((keys) =>
       Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
-    ).then(() => self.clients.claim())
+    )
   );
 });
 

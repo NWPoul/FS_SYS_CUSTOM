@@ -1,12 +1,12 @@
 /* FS SYS shell SW — generated; do not edit */
-const CACHE_NAME = "fs-sys-shell-18.11.2026, 08:49 UTC";
+const CACHE_NAME = "fs-sys-shell-18.11.2026, 09:42 UTC";
 const PRECACHE = [
   "/FS_SYS_CUSTOM/index.html",
   "/FS_SYS_CUSTOM/manifest.webmanifest",
   "/FS_SYS_CUSTOM/icons/icon-192.png",
   "/FS_SYS_CUSTOM/icons/icon-512.png",
-  "/FS_SYS_CUSTOM/chunk-pdm0ff58.js",
-  "/FS_SYS_CUSTOM/chunk-zkrm65b6.css"
+  "/FS_SYS_CUSTOM/chunk-2d1qfq9g.js",
+  "/FS_SYS_CUSTOM/chunk-jfby7p16.css"
 ];
 const STATIC_EXT = /\.(?:js|css|png|svg|webmanifest|ico|woff2?)$/i;
 
